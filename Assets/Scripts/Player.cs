@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
     {
         _currentTimer += Time.deltaTime;
 
+        Debug.Log(_currentTimer);
+
         _xInput = Input.GetAxisRaw(HorizontalAxis);
         _zInput = Input.GetAxisRaw(VerticalAxis);
 
