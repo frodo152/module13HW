@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    [SerializeField] private Game game;
+
     private void Update()
     {
         transform.Rotate(0, 0, 0.5f);
@@ -15,7 +17,8 @@ public class Coin : MonoBehaviour
 
         if (player != null)
         {
-            player.AddCoin(1);
+            game.AddCoin(1);
+            Debug.Log("Монета собрана!");
             gameObject.SetActive(false);
         }
     }

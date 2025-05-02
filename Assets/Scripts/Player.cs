@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private float _currentTimer;
-    [SerializeField] private float _timerToDead;
-
     private string HorizontalAxis = "Horizontal";
     private string VerticalAxis = "Vertical";
     private KeyCode _jumpKey = KeyCode.Space;
@@ -16,14 +13,10 @@ public class Player : MonoBehaviour
 
     private bool _isJumping = false;
 
-    [SerializeField] private float _coinsToWin;
-
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
 
     private Rigidbody _rigidbody;
-
-    private int _coins;
 
     private void Awake()
     {
@@ -32,10 +25,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        _currentTimer += Time.deltaTime;
-
-        Debug.Log(_currentTimer);
-
         _xInput = Input.GetAxisRaw(HorizontalAxis);
         _zInput = Input.GetAxisRaw(VerticalAxis);
 
@@ -47,16 +36,6 @@ public class Player : MonoBehaviour
         Vector3 force = new Vector3(_xInput, 0, _zInput) * _speed;
 
         _rigidbody.AddForce(force);
-
-        if (_coins == _coinsToWin)
-        {
-            ProcessVictory();
-        }
-
-        if (_currentTimer >= _timerToDead)
-        {
-            ProcessDefeat();
-        }
     }
 
     private void FixedUpdate()
@@ -66,22 +45,5 @@ public class Player : MonoBehaviour
             _rigidbody.AddForce(Vector3.up * _jumpForce);
             _isJumping = false;
         }
-    }
-
-    public void AddCoin(int value)
-    {
-        _coins += value;
-    }
-
-    private void ProcessDefeat()
-    {
-        Debug.Log("¬рем€ вышло! ¬ы не успели собрать все монеты за отведенное врем€!");
-        gameObject.SetActive(false);
-    }
-
-    private void ProcessVictory()
-    {
-        Debug.Log("¬ы собрали все монеты за отведенное врем€ и победили!");
-        gameObject.SetActive(false);
     }
 }
